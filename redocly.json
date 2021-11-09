@@ -1,1 +1,610 @@
-
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "0.0.1",
+		"title": "Packing list service API",
+		"description": "Publicly accessible endpoints",
+		"termsOfService": "Terms of Service",
+		"contact": {
+			"name": "ShipRusg dev team",
+			"email": "info@shiprush.com",
+			"url": "https://shuiprush.com"
+		},
+		"license": {
+			"name": "Descartes licence",
+			"url": "https://shuiprush.com"
+		}
+	},
+	"paths": {
+		"/v1/PackingListService.svc/packinglist/config": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.GetPackingListConfig",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"$ref": "#/definitions/ShipRush.BusinessLayer.Shipping.Proxies.PackingListConfigurationResponse"
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/get": {
+			"post": {
+				"operationId": "ShipRush.WebService.PackingListService.GetPackingList",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "xmlPackingList",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/System.IO.Stream"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/getbarcode/{barcodeType}/{barcodeText}": {
+			"get": {
+				"tags": [
+					"PackingListService"
+				],
+				"summary": "GetBarcode",
+				"description": "Get barcode",
+				"operationId": "ShipRush.WebService.PackingListService.GetBarcode",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "barcodeType",
+						"in": "header",
+						"description": "Type of barcode. Possible values: Code128, Code39 Postnet, UPCA, EAN8, ISBN, Codabar, I2of5, Code93, EAN13, JAN13, Bookland, UPCE, PDF417, PDF417Truncated, DataMatrix, QRCode, Aztec, Planet, EAN128, GS1_128, USPSSackLabel, USPSTrayLabel, DeutschePostIdentcode, DeutschePostLeitcode, Numly, PZN, OpticalProduct, SwissPostParcel, RoyalMail, DutchKix, SingaporePostalCode, EAN2, EAN5, EAN14, MacroPDF417, MicroPDF417, GS1_DataMatrix",
+						"type": "string"
+					},
+					{
+						"name": "barcodeText",
+						"in": "header",
+						"description": "Barcocde text",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "barcodeType",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "barcodeText",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Barcode image",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					},
+					"500": {
+						"description": "Internal error",
+						"examples": {
+							"application/xml": {
+								"error:": "error description"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/getimage/{accountId}/{merchantSettingsId}/{name}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.GetImage",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "accountId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "merchantSettingsId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "name",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/getimage_nocache/{accountId}/{merchantSettingsId}/{name}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.GetImage_NoCache",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "accountId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "merchantSettingsId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "name",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/getshippinglabel/{shippingLabelId}/{landscape}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.GetShippingLabel",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "shippingLabelId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "landscape",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/image/{imageId}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.GetImageById",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "imageId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/ping": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.PingPackingListServer",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/PackingListService.svc/packinglist/test": {
+			"get": {
+				"operationId": "ShipRush.WebService.PackingListService.PackingListTest",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/rest/{userTokenId}/getlastdeploycolor": {
+			"get": {
+				"operationId": "ShipRush.WebService.PublicService.GetLastDeployColor",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "userTokenId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"/v1/rest/{userTokenId}/setlastdeploycolor/{value}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PublicService.SetLastDeployColor",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "userTokenId",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "value",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/rest/gettoolkitcertificate/{certificateType}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PublicService.GetToolkitCertificate",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "certificateType",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					}
+				}
+			}
+		},
+		"/v1/rest/getversion": {
+			"get": {
+				"tags": [
+					"PublicApi"
+				],
+				"summary": "Get version",
+				"description": "get current build version.",
+				"operationId": "ShipRush.WebService.PublicService.GetVersion",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"responses": {
+					"200": {
+						"description": "Current build number successfully retrieved",
+						"schema": {
+							"type": "string",
+							"format": "stream"
+						}
+					},
+					"500": {
+						"description": "Internal error (can be forced using ERROR_500 as book title)",
+						"examples": {
+							"application/xml": {
+								"error:": "error description"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/v1/rest/pushing/null": {
+			"post": {
+				"operationId": "ShipRush.WebService.PublicService.PushingApiTestNull",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "stream",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/System.IO.Stream"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/rest/pushing/test": {
+			"post": {
+				"operationId": "ShipRush.WebService.PublicService.PushingApiTest",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "stream",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/System.IO.Stream"
+						}
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/rest/redis/add/{key}/{value}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PublicService.AddRedisValue",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "key",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "value",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/rest/redis/check/{key}/{value}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PublicService.CheckRedisValue",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "key",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "value",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available"
+					}
+				}
+			}
+		},
+		"/v1/rest/timeouttest/{token}/{interval}": {
+			"get": {
+				"operationId": "ShipRush.WebService.PublicService.TimeoutTest",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/json",
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "token",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "interval",
+						"in": "path",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"default": {
+						"description": "not available",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"ShipRush.BusinessLayer.Shipping.Proxies.PackingListConfigurationResponse": {
+			"properties": {
+				"PackingListServiceURL": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"PackingListServiceVersion": {
+					"type": "string",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "ShipRush.BusinessLayer.Shipping.Proxies.PackingListConfigurationResponse"
+		},
+		"System.IO.Stream": {
+			"type": "string",
+			"format": "stream"
+		}
+	}
+}
