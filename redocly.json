@@ -589,12 +589,15 @@
 	},
 	"definitions": {
 		"ShipRush.BusinessLayer.Shipping.Proxies.PackingListConfigurationResponse": {
+			"description": "Packing list configuration response",
 			"properties": {
 				"PackingListServiceURL": {
+					"description": "Packing list service URL",
 					"type": "string",
 					"uniqueItems": false
 				},
 				"PackingListServiceVersion": {
+					"description": "Current version of packing list service",
 					"type": "string",
 					"uniqueItems": false
 				}
