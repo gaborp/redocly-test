@@ -18,6 +18,11 @@
 	"paths": {
 		"/v1/PackingListService.svc/packinglist/config": {
 			"get": {
+				"tags": [
+					"PackingListService"
+				],
+				"summary": "GetPackingListConfig",
+				"description": "returns packing list configuration.",
 				"operationId": "ShipRush.WebService.PackingListService.GetPackingListConfig",
 				"consumes": [
 					"application/xml"
@@ -26,10 +31,18 @@
 					"application/xml"
 				],
 				"responses": {
-					"default": {
-						"description": "not available",
+					"200": {
+						"description": "Barcode image",
 						"schema": {
 							"$ref": "#/definitions/ShipRush.BusinessLayer.Shipping.Proxies.PackingListConfigurationResponse"
+						}
+					},
+					"500": {
+						"description": "Internal error",
+						"examples": {
+							"application/xml": {
+								"error:": "error description"
+							}
 						}
 					}
 				}
